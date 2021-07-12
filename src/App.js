@@ -3,6 +3,7 @@ import { BrowserRouter, Link, Route } from 'react-router-dom';
 import './App.css';
 import SearchBar from './components/SearchBar';
 import ShoppingCart from './components/ShoppingCart';
+import CategoriesList from './components/CategoriesList';
 
 class App extends React.Component {
   render() {
@@ -10,6 +11,7 @@ class App extends React.Component {
       <div>
         <BrowserRouter>
           <Route exact path="/" component={ SearchBar } />
+          <Route exact path="/" component={ CategoriesList } />
           <Link data-testid="shopping-cart-button" to="/shoppingcart">
             Carrinho de Compras
           </Link>
