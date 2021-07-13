@@ -78,6 +78,13 @@ export default class HomePage extends React.Component {
                 <h3>{title}</h3>
                 <img src={ thumbnail } alt="Foto do Produto" />
                 <p>{`R$${price}`}</p>
+                <button
+                  type="button"
+                  onClick=""
+                  data-testid="product-add-to-cart"
+                >
+                  Comprar
+                </button>
               </div>
             ))
           }
