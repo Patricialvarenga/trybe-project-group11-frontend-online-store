@@ -10,7 +10,6 @@ export default class HomePage extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.fetchAPI = this.fetchAPI.bind(this);
-
     this.state = {
       produto: '',
       itens: [],
@@ -30,6 +29,16 @@ export default class HomePage extends React.Component {
       produto: value,
     }));
     console.log(name);
+  }
+
+  // criar uma nova função
+  // associar essa nova função com o categoriesList
+
+  async fetchProductsByCategoryId(categoryId) {
+    const items = await getProductsFromCategoryAndQuery(categoryId, false);
+    this.setState({
+      itens: items.results,
+    });
   }
 
   async fetchAPI() {
@@ -67,6 +76,10 @@ export default class HomePage extends React.Component {
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
         </div>
+        {/* <div className="landingPage">
+          <CategoriesList onChange={ this.fetchProductsByCategoryId } />
+        </div> */}
+
         <div className="items-container">
           {
             itens && itens.map(({ id, title, thumbnail, price }) => (
