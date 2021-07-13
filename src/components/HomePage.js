@@ -7,20 +7,19 @@ export default class HomePage extends React.Component {
   constructor() {
     super();
 
-    this.fetchCategories = this.fetchCategories.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.fetchItems = this.fetchItems.bind(this);
+    this.fetchAPI = this.fetchAPI.bind(this);
 
     this.state = {
       produto: '',
       itens: [],
       categorias: [],
+      categoriaEscolhida: 'MLB1055',
     };
   }
 
   componentDidMount() {
-    this.fetchItems();
-    this.fetchCategories();
+    this.fetchAPI();
   }
 
   handleChange({ target }) {
@@ -30,18 +29,15 @@ export default class HomePage extends React.Component {
     });
   }
 
-  async fetchCategories() {
+  async fetchAPI() {
     const allCategories = await getCategories();
-    this.setState({
-      categorias: allCategories,
-    });
-  }
+    const { produto, categoriaEscolhida } = this.state;
+    const allItems = await getProductsFromCategoryAndQuery(categoriaEscolhida, produto);
+    const { results } = allItems;
 
-  async fetchItems() {
-    const { produto } = this.state;
-    const allItems = await getProductsFromCategoryAndQuery('MLB1055', produto);
     this.setState({
-      itens: allItems.results,
+      itens: await results,
+      categorias: allCategories,
     });
   }
 
@@ -55,7 +51,7 @@ export default class HomePage extends React.Component {
             <ul>
               {categorias
                 .map((item) => (
-                  <li data-testid="category" key={ item.id }>{item.name}</li>
+                  <li key={ item.id } data-testid="category">{item.name}</li>
                 ))}
             </ul>
           </div>
@@ -63,7 +59,7 @@ export default class HomePage extends React.Component {
         <div className="search-container">
           <Search
             handleChange={ this.handleChange }
-            onClick={ this.fetchItems }
+            onClick={ this.fetchAPI }
           />
         </div>
         <div className="items-container">
