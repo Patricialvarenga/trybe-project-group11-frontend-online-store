@@ -10,7 +10,6 @@ export default class HomePage extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.fetchAPI = this.fetchAPI.bind(this);
-    this.genericFunc = this.genericFunc.bind(this);
 
     this.state = {
       produto: '',
@@ -33,34 +32,16 @@ export default class HomePage extends React.Component {
     console.log(name);
   }
 
-  async genericFunc() {
+  async fetchAPI() {
     const { produto, categoriaEscolhida } = this.state;
     const allItems = await getProductsFromCategoryAndQuery(categoriaEscolhida, produto);
     const allCategories = await getCategories();
-    if (allItems && allCategories) {
-      const newObj = {
-        results: allItems.results,
-        allCategories,
-      };
-      return newObj;
-    }
-    return {
-      allCategories,
-    };
-  }
+    const results = allItems ? allItems.results : [];
 
-  async fetchAPI() {
-    const { results, allCategories } = await this.genericFunc();
-    if (results && allCategories) {
-      this.setState({
-        categorias: allCategories,
-        itens: results,
-      });
-    } else {
-      this.setState({
-        categorias: allCategories,
-      });
-    }
+    this.setState({
+      itens: results,
+      categorias: allCategories,
+    });
   }
 
   render() {
