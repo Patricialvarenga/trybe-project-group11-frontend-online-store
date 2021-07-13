@@ -11,14 +11,20 @@ class App extends React.Component {
     return (
       <main>
         <Header />
-        <BrowserRouter>
-          <Route exact path="/" component={ ItemsList } />
-          <Route exact path="/" component={ CategoriesList } />
-          <Link data-testid="shopping-cart-button" to="/shoppingcart">
-            Carrinho de Compras
-          </Link>
-          <Route exact path="/shoppingcart" component={ ShoppingCart } />
-        </BrowserRouter>
+        <section>
+          <nav className="categories">
+            <CategoriesList />
+          </nav>
+          <div className="ctems">
+            <BrowserRouter>
+              <ItemsList />
+              <Link data-testid="shopping-cart-button" to="/shoppingcart">
+                Carrinho de Compras
+              </Link>
+              <Route exact path="/shoppingcart" component={ ShoppingCart } />
+            </BrowserRouter>
+          </div>
+        </section>
       </main>
     );
   }

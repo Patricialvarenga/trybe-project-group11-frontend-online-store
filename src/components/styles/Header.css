@@ -1,3 +1,7 @@
 header {
-  background-color: #4864D5
+  background-color: hsl(228, 63%, 56%);
+  height: 75px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

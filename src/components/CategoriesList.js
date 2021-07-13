@@ -27,6 +27,7 @@ export default class CategoriesList extends React.Component {
     const { categories } = this.state;
     return (
       <div>
+        <h2>Categorias</h2>
         <ul>
           {categories.map((item) => (
             <li key={ item.id } data-testid="category">
