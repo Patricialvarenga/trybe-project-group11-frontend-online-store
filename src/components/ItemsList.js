@@ -56,7 +56,7 @@ export default class ItemsList extends React.Component {
             >
               <h3>{item.title}</h3>
               <img src={ item.thumbnail } alt="Foto do Produto" />
-              <p>{item.price}</p>
+              <p>{`R$${item.price}`}</p>
             </div>
           ))}
         </div>

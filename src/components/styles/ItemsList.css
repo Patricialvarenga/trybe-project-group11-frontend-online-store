@@ -8,5 +8,16 @@
 }
 
 .each-item {
-  width: 25%;
+  width: 20%;
+  margin: 7px;
+  display: flex;
+  justify-content: center;
+  flex-flow: column;
+  align-items: center;
+  padding: 15px;
+}
+
+h3 {
+  font-size: 14px;
+  text-align: center;
 }
