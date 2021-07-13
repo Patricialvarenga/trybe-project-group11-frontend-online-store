@@ -1,16 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { getCategories } from '../services/api';
 
 export default class CategoriesList extends React.Component {
   render() {
-    const { categorias } = this.props;
+    const { categorias, handleClick } = this.props;
     return (
       <div>
         <h2>Categorias</h2>
         <ul>
           {categorias && categorias
             .map((item) => (
-              <li key={ item.id } data-testid="category">{item.name}</li>
+              <button
+                type="button"
+                id={ item.id }
+                onClick={ handleClick }
+                key={ item.id }
+                data-testid="category"
+              >
+                {item.name}
+              </button>
             ))}
         </ul>
       </div>
@@ -20,4 +29,7 @@ export default class CategoriesList extends React.Component {
 
 CategoriesList.propTypes = {
   categorias: PropTypes.arrayOf(Object).isRequired,
+  handleClick: PropTypes.func.isRequired,
 };
+
+// chamar a função q exibe os produtos na tela
