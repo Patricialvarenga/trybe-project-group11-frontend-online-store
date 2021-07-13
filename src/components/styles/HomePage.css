@@ -1,20 +1,19 @@
-.categories-list {
+/* .categories-list {
   border: 1px solid black;
   margin: 0 2%;
   padding: 20px;
-  width: 25%;
   height: max-content;
+  width: 25%;
 }
 
 .categories-list h2 {
   text-align: center;
-  
 }
 
 .search-bar {
   display: flex;
-  flex-flow: column;
   align-items: center;
+  flex-flow: column;
 }
 
 .search-bar div {
@@ -24,11 +23,11 @@
 }
 
 input {
-  width: 80%;
   height: 27px;
-  outline: none;
-  border-radius: 4px;
+  width: 80%;
   border: 2px solid black;
+  border-radius: 4px;
+  outline: none;
 }
 
 button {
@@ -81,4 +80,4 @@ img {
 
 p {
   margin: 15px auto;
-}
+} */
