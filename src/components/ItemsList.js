@@ -1,6 +1,6 @@
 import React from 'react';
 import { getProductsFromCategoryAndQuery } from '../services/api';
-import SearchBar from './SearchBar';
+import './styles/ItemsList.css';
 
 export default class ItemsList extends React.Component {
   constructor() {
@@ -38,19 +38,42 @@ export default class ItemsList extends React.Component {
   render() {
     const { items } = this.state;
     return (
-      <div>
-        <SearchBar
-          handleChange={ this.handleChange }
-          itemList={ items }
-        />
-        <button
-          data-testid="query-button"
-          type="button"
-          onClick={ this.fetchItems }
-        >
-          Pesquisar
-        </button>
+      <div className="search-container">
+        <div className="search-bar">
+          <input type="text" data-testid="query-input" onChange={ this.handleChange } />
+          <p data-testid="home-initial-message">
+            Digite algum termo de pesquisa ou escolha uma categoria.
+          </p>
+        </div>
+        <div className="items">
+
+          {items.map((item) => (
+            <div
+              style={ { border: '1px solid black' } }
+              data-testid="product"
+              key={ item.id }
+              className="each-item"
+            >
+              <h3>{item.title}</h3>
+              <img src={ item.thumbnail } alt="Foto do Produto" />
+              <p>{item.price}</p>
+            </div>
+          ))}
+        </div>
       </div>
+      // <div>
+      //   <SearchBar
+      //     handleChange={ this.handleChange }
+      //     itemList={ items }
+      //   />
+      //   <button
+      //     data-testid="query-button"
+      //     type="button"
+      //     onClick={ this.fetchItems }
+      //   >
+      //     Pesquisar
+      //   </button>
+      // </div>
 
     );
   }

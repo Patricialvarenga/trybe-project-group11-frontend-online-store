@@ -4,6 +4,11 @@
   box-sizing: border-box;
 }
 
+section {
+  display: flex;
+  flex-flow: row;
+}
+
 .categories {
   border: 1px solid black;
   margin: 0 2%;

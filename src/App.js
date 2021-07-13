@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Link, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import './App.css';
 import ShoppingCart from './components/ShoppingCart';
 import CategoriesList from './components/CategoriesList';
@@ -15,15 +15,7 @@ class App extends React.Component {
           <nav className="categories">
             <CategoriesList />
           </nav>
-          <div className="ctems">
-            <BrowserRouter>
-              <ItemsList />
-              <Link data-testid="shopping-cart-button" to="/shoppingcart">
-                Carrinho de Compras
-              </Link>
-              <Route exact path="/shoppingcart" component={ ShoppingCart } />
-            </BrowserRouter>
-          </div>
+          <ItemsList />
         </section>
       </main>
     );

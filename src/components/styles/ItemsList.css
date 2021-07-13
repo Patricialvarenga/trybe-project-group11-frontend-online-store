@@ -1,0 +1,12 @@
+.search-container {
+  width: 75%;
+}
+
+.items {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.each-item {
+  width: 25%;
+}
