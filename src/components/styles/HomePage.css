@@ -1,0 +1,12 @@
+.categories {
+  border: 1px solid black;
+  margin: 0 2%;
+  padding: 20px;
+  width: 25%;
+  height: max-content;
+}
+
+h2 {
+  text-align: center;
+  
+}

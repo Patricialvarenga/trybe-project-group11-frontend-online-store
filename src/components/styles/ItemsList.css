@@ -1,3 +1,8 @@
+.search-container {
+  margin: auto 10px;
+  padding: auto;
+}
+
 .search-bar {
   display: flex;
   flex-flow: column;
@@ -5,7 +10,9 @@
 }
 
 .search-bar div {
-  width: 95%;
+  display: flex;
+  flex-flow: row;
+  width: 80%;
 }
 
 input {
@@ -24,6 +31,16 @@ button {
   padding: 3px;
 }
 
+button:hover {
+  background-color: rgb(207, 207, 207);
+  cursor: pointer;
+}
+
+button:active {
+  transform: scale(0.98);
+  /* https://www.geeksforgeeks.org/how-to-add-a-pressed-effect-on-button-click-in-css/ */
+}
+
 .search-container {
   width: 75%;
 }
@@ -35,17 +52,22 @@ button {
 
 .each-item {
   width: 20%;
-  margin: 7px;
+  margin: 7px 0 7px 35px;
   display: flex;
   justify-content: center;
   flex-flow: column;
   align-items: center;
-  padding: 15px;
+  padding: 10px;
+  box-shadow: 2px 3px 4px hsl(228, 63%, 56%);
 }
 
 h3 {
   font-size: 14px;
   text-align: center;
+}
+
+img {
+  width: 90px;
 }
 
 p {

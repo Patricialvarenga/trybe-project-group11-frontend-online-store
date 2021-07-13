@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { getProductsFromCategoryAndQuery } from '../services/api';
 import './styles/ItemsList.css';
 
@@ -49,6 +50,9 @@ export default class ItemsList extends React.Component {
             >
               Pesquisar
             </button>
+            <Link to="/shoppingcart">
+              Carrinho de Compras
+            </Link>
           </div>
           <p data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.

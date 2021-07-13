@@ -5,4 +5,10 @@ header {
   justify-content: center;
   align-items: center;
   margin-bottom: 3%;
+  box-shadow: 2px 3px 5px black ;
+}
+
+h1 {
+    text-shadow: 3px 3px 5px #fff;
+
 }
