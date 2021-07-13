@@ -46,7 +46,6 @@ button:hover {
 
 button:active {
   transform: scale(0.98);
-  /* https://www.geeksforgeeks.org/how-to-add-a-pressed-effect-on-button-click-in-css/ */
 }
 
 .search-container {

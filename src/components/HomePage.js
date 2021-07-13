@@ -1,7 +1,8 @@
 import React from 'react';
 import './styles/HomePage.css';
-import { getProductsFromCategoryAndQuery, getCategories } from '../services/api';
+import { getProductsFromCategoryAndQuery } from '../services/api';
 import Search from './Search';
+import CategoriesList from './CategoriesList';
 
 export default class HomePage extends React.Component {
   constructor() {
@@ -13,7 +14,6 @@ export default class HomePage extends React.Component {
     this.state = {
       produto: '',
       itens: [],
-      categorias: [],
       categoriaEscolhida: 'MLB1055',
     };
   }
@@ -23,40 +23,27 @@ export default class HomePage extends React.Component {
   }
 
   handleChange({ target }) {
-    const { value } = target;
+    const { value, name } = target;
     this.setState({
       produto: value,
     });
+    console.log(name);
   }
 
   async fetchAPI() {
-    const allCategories = await getCategories();
     const { produto, categoriaEscolhida } = this.state;
     const allItems = await getProductsFromCategoryAndQuery(categoriaEscolhida, produto);
-    const { results } = allItems;
-
     this.setState({
-      itens: await results,
-      categorias: allCategories,
+      itens: allItems.results,
     });
   }
 
   render() {
-    const { itens, categorias } = this.state;
+    const { itens } = this.state;
     return (
       <section>
-        <div className="categories-list">
-          <div>
-            <h2>Categorias</h2>
-            <ul>
-              {categorias
-                .map((item) => (
-                  <li key={ item.id } data-testid="category">{item.name}</li>
-                ))}
-            </ul>
-          </div>
-        </div>
-        <div className="search-container">
+        <CategoriesList />
+        <div>
           <Search
             handleChange={ this.handleChange }
             onClick={ this.fetchAPI }
