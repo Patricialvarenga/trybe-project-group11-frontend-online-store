@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header';
 import HomePage from './components/HomePage';
@@ -12,8 +12,10 @@ class App extends React.Component {
         <Header />
         <section>
           <BrowserRouter>
-            <Route exact path="/" component={ HomePage } />
-            <Route exact path="/shoppingcart" component={ ShoppingCart } />
+            <Switch>
+              <Route exact path="/" component={ HomePage } />
+              <Route exact path="/shoppingcart" component={ ShoppingCart } />
+            </Switch>
           </BrowserRouter>
         </section>
       </main>
