@@ -1,7 +1,7 @@
 import React from 'react';
 import './styles/HomePage.css';
-import { getProductsFromCategoryAndQuery } from '../services/api';
-import Search from './Search';
+import { Link } from 'react-router-dom';
+import { getProductsFromCategoryAndQuery, getCategories } from '../services/api';
 import CategoriesList from './CategoriesList';
 
 export default class HomePage extends React.Component {
@@ -10,48 +10,85 @@ export default class HomePage extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.fetchAPI = this.fetchAPI.bind(this);
+    this.genericFunc = this.genericFunc.bind(this);
 
     this.state = {
       produto: '',
       itens: [],
+      categorias: [],
       categoriaEscolhida: 'MLB1055',
     };
   }
 
-  componentDidMount() {
-    this.fetchAPI();
+  async componentDidMount() {
+    await this.fetchAPI();
   }
 
   handleChange({ target }) {
     const { value, name } = target;
-    this.setState({
+    this.setState((prevState) => ({
+      ...prevState,
       produto: value,
-    });
+    }));
     console.log(name);
   }
 
-  async fetchAPI() {
+  async genericFunc() {
     const { produto, categoriaEscolhida } = this.state;
     const allItems = await getProductsFromCategoryAndQuery(categoriaEscolhida, produto);
-    this.setState({
-      itens: allItems.results,
-    });
+    const allCategories = await getCategories();
+    if (allItems && allCategories) {
+      const newObj = {
+        results: allItems.results,
+        allCategories,
+      };
+      return newObj;
+    }
+    return {
+      allCategories,
+    };
+  }
+
+  async fetchAPI() {
+    const { results, allCategories } = await this.genericFunc();
+    if (results && allCategories) {
+      this.setState({
+        categorias: allCategories,
+        itens: results,
+      });
+    } else {
+      this.setState({
+        categorias: allCategories,
+      });
+    }
   }
 
   render() {
-    const { itens } = this.state;
+    const { itens, categorias } = this.state;
     return (
       <section>
-        <CategoriesList />
+        <CategoriesList
+          categorias={ categorias }
+        />
         <div>
-          <Search
-            handleChange={ this.handleChange }
-            onClick={ this.fetchAPI }
-          />
+          <input type="text" data-testid="query-input" onChange={ this.handleChange } />
+          <button
+            data-testid="query-button"
+            type="button"
+            onClick={ () => this.fetchAPI() }
+          >
+            Pesquisar
+          </button>
+          <Link to="/shoppingcart" data-testid="shopping-cart-button">
+            Carrinho de Compras
+          </Link>
+          <p data-testid="home-initial-message">
+            Digite algum termo de pesquisa ou escolha uma categoria.
+          </p>
         </div>
         <div className="items-container">
           {
-            itens.map(({ id, title, thumbnail, price }) => (
+            itens && itens.map(({ id, title, thumbnail, price }) => (
               <div
                 data-testid="product"
                 key={ id }
