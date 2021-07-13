@@ -4,11 +4,13 @@ import './App.css';
 import ShoppingCart from './components/ShoppingCart';
 import CategoriesList from './components/CategoriesList';
 import ItemsList from './components/ItemsList';
+import Header from './components/Header';
 
 class App extends React.Component {
   render() {
     return (
-      <div>
+      <main>
+        <Header />
         <BrowserRouter>
           <Route exact path="/" component={ ItemsList } />
           <Route exact path="/" component={ CategoriesList } />
@@ -17,7 +19,7 @@ class App extends React.Component {
           </Link>
           <Route exact path="/shoppingcart" component={ ShoppingCart } />
         </BrowserRouter>
-      </div>
+      </main>
     );
   }
 }
