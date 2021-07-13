@@ -1,7 +1,7 @@
 import React from 'react';
 import './styles/HomePage.css';
-import { getProductsFromCategoryAndQuery } from '../services/api';
-import Search from './Search';
+import { Link } from 'react-router-dom';
+import { getProductsFromCategoryAndQuery, getCategories } from '../services/api';
 import CategoriesList from './CategoriesList';
 
 export default class HomePage extends React.Component {
@@ -14,44 +14,62 @@ export default class HomePage extends React.Component {
     this.state = {
       produto: '',
       itens: [],
+      categorias: [],
       categoriaEscolhida: 'MLB1055',
     };
   }
 
-  componentDidMount() {
-    this.fetchAPI();
+  async componentDidMount() {
+    await this.fetchAPI();
   }
 
   handleChange({ target }) {
     const { value, name } = target;
-    this.setState({
+    this.setState((prevState) => ({
+      ...prevState,
       produto: value,
-    });
+    }));
     console.log(name);
   }
 
   async fetchAPI() {
     const { produto, categoriaEscolhida } = this.state;
     const allItems = await getProductsFromCategoryAndQuery(categoriaEscolhida, produto);
+    const allCategories = await getCategories();
+    const results = allItems ? allItems.results : [];
+
     this.setState({
-      itens: allItems.results,
+      itens: results,
+      categorias: allCategories,
     });
   }
 
   render() {
-    const { itens } = this.state;
+    const { itens, categorias } = this.state;
     return (
       <section>
-        <CategoriesList />
+        <CategoriesList
+          categorias={ categorias }
+        />
         <div>
-          <Search
-            handleChange={ this.handleChange }
-            onClick={ this.fetchAPI }
-          />
+          <input type="text" data-testid="query-input" onChange={ this.handleChange } />
+          <button
+            data-testid="query-button"
+            type="button"
+            onClick={ () => this.fetchAPI() }
+          >
+            Pesquisar
+          </button>
+          <Link to="/shoppingcart" data-testid="shopping-cart-button">
+            Carrinho de Compras
+          </Link>
+          <p data-testid="home-initial-message">
+            Digite algum termo de pesquisa ou escolha uma categoria.
+          </p>
         </div>
         <div className="items-container">
           {
-            itens.map(({ id, title, thumbnail, price }) => (
+            itens && itens.map(({ id, title, thumbnail, price }) => (
               <div
                 data-testid="product"
                 key={ id }
