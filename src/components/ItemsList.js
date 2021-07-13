@@ -40,7 +40,16 @@ export default class ItemsList extends React.Component {
     return (
       <div className="search-container">
         <div className="search-bar">
-          <input type="text" data-testid="query-input" onChange={ this.handleChange } />
+          <div>
+            <input type="text" data-testid="query-input" onChange={ this.handleChange } />
+            <button
+              data-testid="query-button"
+              type="button"
+              onClick={ this.fetchItems }
+            >
+              Pesquisar
+            </button>
+          </div>
           <p data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
@@ -61,19 +70,6 @@ export default class ItemsList extends React.Component {
           ))}
         </div>
       </div>
-      // <div>
-      //   <SearchBar
-      //     handleChange={ this.handleChange }
-      //     itemList={ items }
-      //   />
-      //   <button
-      //     data-testid="query-button"
-      //     type="button"
-      //     onClick={ this.fetchItems }
-      //   >
-      //     Pesquisar
-      //   </button>
-      // </div>
 
     );
   }
