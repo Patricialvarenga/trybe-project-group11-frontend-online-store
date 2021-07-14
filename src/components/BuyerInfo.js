@@ -16,8 +16,6 @@ export default class BuyerInfo extends React.Component {
             value={ fullname }
             onChange={ handleChange }
           />
-          {}
-          <div>{fullnameError || null}</div>
           <input
             type="text"
             data-testid="checkout-cpf"

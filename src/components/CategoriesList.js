@@ -5,7 +5,7 @@ export default class CategoriesList extends React.Component {
   render() {
     const { categorias } = this.props;
     return (
-      <div>
+      <div className="categories-list">
         <h2>Categorias</h2>
         <ul>
           {categorias && categorias

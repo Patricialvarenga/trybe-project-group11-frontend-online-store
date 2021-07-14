@@ -75,6 +75,9 @@ export default class ShoppingCart extends React.Component {
         <Link to="/">Voltar ao inicio</Link>
         {itensListCart.length <= 0 && this.emptyCart()}
         {itensListCart.length > 0 && this.renderCart()}
+        <div>
+          <Link to="/checkout" data-testid="checkout-products">Finalizar Compra</Link>
+        </div>
       </div>
     );
   }
