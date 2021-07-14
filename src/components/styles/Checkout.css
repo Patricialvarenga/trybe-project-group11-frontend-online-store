@@ -1,0 +1,48 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.checkout-container {
+  display: flex;
+  flex-flow: column;
+  margin: auto;
+  width: 50%;
+}
+
+button {
+  font-weight: 700;
+  height: 30px;
+  margin: 10px auto;
+  padding: 0;
+  width: 114px;
+}
+
+.checkout-container section {
+  border: 1px solid black;
+  display: flex;
+  flex-flow: column;
+  padding: 12px;
+}
+
+.first-layer-informations {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.first-layer-informations input {
+  margin: 6px;
+}
+
+.payment-methods input {
+  margin: 15px;
+}
+
+.invalido {
+  border: 2px solid red;
+}
+
+.valido {
+  border: 2px solid green;
+}

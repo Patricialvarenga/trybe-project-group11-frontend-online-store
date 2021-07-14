@@ -11,12 +11,14 @@ export default class HomePage extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.fetchAPI = this.fetchAPI.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.addItemCart = this.addItemCart.bind(this);
 
     this.state = {
       produto: '',
       itens: [],
       categorias: [],
       categoriaEscolhida: 'MLB1055',
+      qtdCart: 0,
     };
   }
 
@@ -50,8 +52,18 @@ export default class HomePage extends React.Component {
     });
   }
 
+  addItemCart(itens) {
+    const listCart = localStorage
+      .getItem('itensCart') ? JSON.parse(localStorage.getItem('itensCart')) : [];
+    listCart.push(itens);
+    localStorage.setItem('itensCart', JSON.stringify(listCart));
+    this.setState({
+      qtdCart: listCart.length,
+    });
+  }
+
   render() {
-    const { itens, categorias, categoriaEscolhida } = this.state;
+    const { itens, categorias, categoriaEscolhida, qtdCart } = this.state;
     return (
       <section>
         <CategoriesList
@@ -59,37 +71,55 @@ export default class HomePage extends React.Component {
           categoriaEscolhida={ categoriaEscolhida }
           handleClick={ this.handleClick }
         />
-        <div>
-          <input type="text" data-testid="query-input" onChange={ this.handleChange } />
-          <button
-            data-testid="query-button"
-            type="button"
-            onClick={ () => this.fetchAPI() }
-          >
-            Pesquisar
-          </button>
-          <Link to="/shoppingcart" data-testid="shopping-cart-button">
-            Carrinho de Compras
-          </Link>
+        <div className="search-bar-and-items">
+          <div className="search-bar">
+            <input
+              type="text"
+              data-testid="query-input"
+              onChange={ this.handleChange }
+            />
+            <button
+              data-testid="query-button"
+              type="button"
+              onClick={ () => this.fetchAPI() }
+            >
+              Pesquisar
+            </button>
+            <Link to="/shoppingcart" data-testid="shopping-cart-button">
+              Carrinho de Compras
+            </Link>
+            <span>
+              Itens no carrinho:
+              { qtdCart }
+            </span>
+          </div>
           <p data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
+          <div className="items-container">
+            {
+              itens && itens.map(({ id, title, thumbnail, price }) => (
+                <div
+                  data-testid="product"
+                  key={ id }
+                  className="each-item"
+                >
+                  <h3>{title}</h3>
+                  <img src={ thumbnail } alt="Foto do Produto" />
+                  <p>{`R$${price}`}</p>
+                  <button
+                    type="button"
+                    onClick={ () => this.addItemCart({ id, title, thumbnail, price }) }
+                    data-testid="product-add-to-cart"
+                  >
+                    Comprar
+                  </button>
+                </div>
+              ))
+            }
+          </div>
         </div>
-        <div className="items-container">
-          {
-            itens && itens.map(({ id, title, thumbnail, price }) => (
-              <div
-                data-testid="product"
-                key={ id }
-                className="each-item"
-              >
-                <h3>{title}</h3>
-                <img src={ thumbnail } alt="Foto do Produto" />
-                <p>{`R$${price}`}</p>
-              </div>
-            ))
-          }
-        </div>
+
       </section>
     );
   }
