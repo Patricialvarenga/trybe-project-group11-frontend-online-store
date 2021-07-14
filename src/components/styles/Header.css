@@ -1,13 +1,13 @@
-/* header {
-  display: flex;
+header {
   align-items: center;
-  justify-content: center;
   background-color: hsl(228, 63%, 56%);
   box-shadow: 2px 3px 5px black;
+  display: flex;
   height: 75px;
+  justify-content: center;
   margin-bottom: 3%;
 }
 
 h1 {
   text-shadow: 3px 3px 5px white;
-} */
+}
