@@ -10,6 +10,7 @@ export default class HomePage extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.fetchAPI = this.fetchAPI.bind(this);
+    this.handleClick = this.handleClick.bind(this);
     this.addItemCart = this.addItemCart.bind(this);
 
     this.state = {
@@ -26,12 +27,17 @@ export default class HomePage extends React.Component {
   }
 
   handleChange({ target }) {
-    const { value, name } = target;
+    const { value/* , name */ } = target;
     this.setState((prevState) => ({
       ...prevState,
       produto: value,
     }));
-    console.log(name);
+  }
+
+  handleClick(id) {
+    this.setState({
+      categoriaEscolhida: id,
+    });
   }
 
   async fetchAPI() {
@@ -57,11 +63,13 @@ export default class HomePage extends React.Component {
   }
 
   render() {
-    const { itens, categorias, qtdCart } = this.state;
+    const { itens, categorias, categoriaEscolhida, qtdCart } = this.state;
     return (
       <section>
         <CategoriesList
           categorias={ categorias }
+          categoriaEscolhida={ categoriaEscolhida }
+          handleClick={ this.handleClick }
         />
         <div className="search-bar-and-items">
           <div className="search-bar">
