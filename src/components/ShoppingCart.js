@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './styles/ShoppingCart.css';
 
 export default class ShoppingCart extends React.Component {
   constructor() {
@@ -50,12 +51,16 @@ export default class ShoppingCart extends React.Component {
       <div>
         {
           itensListCart.map(({ id, title, thumbnail, price }) => (
-            <div key={ id }>
+            <div key={ id } className="checkout-item">
               <h4 data-testid="shopping-cart-product-name">{title}</h4>
               <img src={ thumbnail } alt="Foto do Produto" />
               <p>{`R$${price}`}</p>
               <p htmlFor="add"> Qtd.</p>
-              <p data-testid="shopping-cart-product-quantity">1</p>
+              <p data-testid="shopping-cart-product-quantity">
+                {itensListCart.filter((item) => (
+                  item.id === id
+                )).length}
+              </p>
             </div>
           ))
         }

@@ -18,9 +18,9 @@ export default class CategoriesList extends React.Component {
                   value={ categoria.id }
                   key={ categoria.id }
                   onClick={ () => handleClick(categoria.id) }
-
+                  data-testid="category"
                 />
-                {item.name}
+                {categoria.name}
                 <br />
               </label>
             ))}
