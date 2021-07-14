@@ -1,72 +1,81 @@
-/* .categories-list {
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.categories-list {
   border: 1px solid black;
-  margin: 0 2%;
-  padding: 20px;
   height: max-content;
-  width: 25%;
+  margin: 0 20px;
+  padding: 12px;
+  padding-left: 23px;
+  width: 20%;
 }
 
 .categories-list h2 {
+  margin-bottom: 10px;
   text-align: center;
 }
 
-.search-bar {
-  display: flex;
+.search-bar-and-items {
   align-items: center;
+  display: flex;
   flex-flow: column;
+  width: 70%;
 }
 
-.search-bar div {
+.search-bar {
+  align-items: center;
   display: flex;
   flex-flow: row;
-  width: 80%;
+  justify-content: center;
+  width: 70%;
 }
 
 input {
-  height: 27px;
-  width: 80%;
   border: 2px solid black;
   border-radius: 4px;
+  height: 27px;
   outline: none;
+  width: 100%;
 }
 
-button {
-  border: 1px solid black;
+.search-bar button {
   background-color: white;
+  border: 1px solid black;
   height: 27px;
-  margin: auto 23px;
+  margin: auto 10px;
   padding: 3px;
 }
 
-button:hover {
+.search-bar button:hover {
   background-color: rgb(207, 207, 207);
   cursor: pointer;
 }
 
-button:active {
+.search-bar button:active {
   transform: scale(0.98);
 }
 
-.search-container {
-  width: 75%;
-}
 
 .items-container {
   display: flex;
   flex-flow: row wrap;
+  margin: 0 10px;
 }
 
 .each-item {
-  width: 20%;
-  min-width: min-content;
-  margin: 7px 0 7px 35px;
-  display: flex;
-  justify-content: center;
-  flex-flow: column;
   align-items: center;
-  padding: 10px;
-  box-shadow: 2px 3px 4px hsl(228, 63%, 56%);
   border: 1px solid black;
+  box-shadow: 2px 3px 4px hsl(228, 63%, 56%);
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  margin: 7px 0 7px 35px;
+  min-width: min-content;
+  padding: 10px;
+  width: 20%;
 }
 
 h3 {
@@ -79,5 +88,6 @@ img {
 }
 
 p {
-  margin: 15px auto;
-} */
+  margin: 15px 0;
+}
+

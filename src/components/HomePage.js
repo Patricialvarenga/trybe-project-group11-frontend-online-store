@@ -63,48 +63,55 @@ export default class HomePage extends React.Component {
         <CategoriesList
           categorias={ categorias }
         />
-        <div>
-          <input type="text" data-testid="query-input" onChange={ this.handleChange } />
-          <button
-            data-testid="query-button"
-            type="button"
-            onClick={ () => this.fetchAPI() }
-          >
-            Pesquisar
-          </button>
-          <Link to="/shoppingcart" data-testid="shopping-cart-button">
-            Carrinho de Compras
-          </Link>
-          <span>
-            Itens no carrinho:
-            { qtdCart }
-          </span>
+        <div className="search-bar-and-items">
+          <div className="search-bar">
+            <input
+              type="text"
+              data-testid="query-input"
+              onChange={ this.handleChange }
+            />
+            <button
+              data-testid="query-button"
+              type="button"
+              onClick={ () => this.fetchAPI() }
+            >
+              Pesquisar
+            </button>
+            <Link to="/shoppingcart" data-testid="shopping-cart-button">
+              Carrinho de Compras
+            </Link>
+            <span>
+              Itens no carrinho:
+              { qtdCart }
+            </span>
+          </div>
           <p data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
-        </div>
-        <div className="items-container">
-          {
-            itens && itens.map(({ id, title, thumbnail, price }) => (
-              <div
-                data-testid="product"
-                key={ id }
-                className="each-item"
-              >
-                <h3>{title}</h3>
-                <img src={ thumbnail } alt="Foto do Produto" />
-                <p>{`R$${price}`}</p>
-                <button
-                  type="button"
-                  onClick={ () => this.addItemCart({ id, title, thumbnail, price }) }
-                  data-testid="product-add-to-cart"
+          <div className="items-container">
+            {
+              itens && itens.map(({ id, title, thumbnail, price }) => (
+                <div
+                  data-testid="product"
+                  key={ id }
+                  className="each-item"
                 >
-                  Comprar
-                </button>
-              </div>
-            ))
-          }
+                  <h3>{title}</h3>
+                  <img src={ thumbnail } alt="Foto do Produto" />
+                  <p>{`R$${price}`}</p>
+                  <button
+                    type="button"
+                    onClick={ () => this.addItemCart({ id, title, thumbnail, price }) }
+                    data-testid="product-add-to-cart"
+                  >
+                    Comprar
+                  </button>
+                </div>
+              ))
+            }
+          </div>
         </div>
+
       </section>
     );
   }
