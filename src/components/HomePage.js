@@ -10,12 +10,14 @@ export default class HomePage extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.fetchAPI = this.fetchAPI.bind(this);
+    this.addItemCart = this.addItemCart.bind(this);
 
     this.state = {
       produto: '',
       itens: [],
       categorias: [],
       categoriaEscolhida: 'MLB1055',
+      qtdCart: 0,
     };
   }
 
@@ -44,8 +46,18 @@ export default class HomePage extends React.Component {
     });
   }
 
+  addItemCart(itens) {
+    const listCart = localStorage
+      .getItem('itensCart') ? JSON.parse(localStorage.getItem('itensCart')) : [];
+    listCart.push(itens);
+    localStorage.setItem('itensCart', JSON.stringify(listCart));
+    this.setState({
+      qtdCart: listCart.length,
+    });
+  }
+
   render() {
-    const { itens, categorias } = this.state;
+    const { itens, categorias, qtdCart } = this.state;
     return (
       <section>
         <CategoriesList
@@ -63,6 +75,10 @@ export default class HomePage extends React.Component {
           <Link to="/shoppingcart" data-testid="shopping-cart-button">
             Carrinho de Compras
           </Link>
+          <span>
+            Itens no carrinho:
+            { qtdCart }
+          </span>
           <p data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
@@ -80,7 +96,7 @@ export default class HomePage extends React.Component {
                 <p>{`R$${price}`}</p>
                 <button
                   type="button"
-                  onClick=""
+                  onClick={ () => this.addItemCart({ id, title, thumbnail, price }) }
                   data-testid="product-add-to-cart"
                 >
                   Comprar
