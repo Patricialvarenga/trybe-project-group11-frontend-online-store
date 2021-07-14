@@ -1,39 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-// Lógica de programação inspirada no projeto do Saulo Kirchmaier https://saulokirchmaier.github.io/no-master-store-shopping/#/
-
 export default class CategoriesList extends React.Component {
-  constructor(props) {
-    super(props);
-
-    // this.state = {
-    //   categories: [],
-    // };
-
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  handleClick(event) {
-    const { onChange } = this.props;
-    onChange(event.target.value);
-  }
-
   render() {
-    const { categorias } = this.props;
+    const { categorias, handleClick } = this.props;
     return (
       <div>
         <h2>Categorias</h2>
-        <div onChange={ this.handleClick }>
+        <div>
           {categorias && categorias
-            .map((item) => (
-              <label key={ item.id } htmlFor={ item.id }>
+            .map((categoria) => (
+              <label key={ categoria.id } htmlFor={ categoria.id }>
                 <input
                   type="radio"
                   name="category"
-                  id={ item.id }
-                  value={ item.id }
-                  key={ item.id }
+                  id={ categoria.id }
+                  value={ categoria.id }
+                  key={ categoria.id }
+                  onClick={ () => handleClick(categoria.id) }
+
                 />
                 {item.name}
                 <br />
@@ -47,5 +32,5 @@ export default class CategoriesList extends React.Component {
 
 CategoriesList.propTypes = {
   categorias: PropTypes.arrayOf(Object).isRequired,
-  onChange: PropTypes.func.isRequired,
+  handleClick: PropTypes.func.isRequired,
 };

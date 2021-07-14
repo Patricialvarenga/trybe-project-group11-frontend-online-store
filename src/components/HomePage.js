@@ -10,6 +10,8 @@ export default class HomePage extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.fetchAPI = this.fetchAPI.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+
     this.state = {
       produto: '',
       itens: [],
@@ -23,21 +25,16 @@ export default class HomePage extends React.Component {
   }
 
   handleChange({ target }) {
-    const { value, name } = target;
+    const { value/* , name */ } = target;
     this.setState((prevState) => ({
       ...prevState,
       produto: value,
     }));
-    console.log(name);
   }
 
-  // criar uma nova função
-  // associar essa nova função com o categoriesList
-
-  async fetchProductsByCategoryId(categoryId) {
-    const items = await getProductsFromCategoryAndQuery(categoryId, false);
+  handleClick(id) {
     this.setState({
-      itens: items.results,
+      categoriaEscolhida: id,
     });
   }
 
@@ -54,11 +51,13 @@ export default class HomePage extends React.Component {
   }
 
   render() {
-    const { itens, categorias } = this.state;
+    const { itens, categorias, categoriaEscolhida } = this.state;
     return (
       <section>
         <CategoriesList
           categorias={ categorias }
+          categoriaEscolhida={ categoriaEscolhida }
+          handleClick={ this.handleClick }
         />
         <div>
           <input type="text" data-testid="query-input" onChange={ this.handleChange } />
@@ -76,10 +75,6 @@ export default class HomePage extends React.Component {
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
         </div>
-        {/* <div className="landingPage">
-          <CategoriesList onChange={ this.fetchProductsByCategoryId } />
-        </div> */}
-
         <div className="items-container">
           {
             itens && itens.map(({ id, title, thumbnail, price }) => (
