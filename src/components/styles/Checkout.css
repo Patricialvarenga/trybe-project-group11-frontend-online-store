@@ -12,11 +12,19 @@
 }
 
 button {
+  background-color: green;
+  border-radius: 5px;
+  color: white;
   font-weight: 700;
   height: 30px;
   margin: 10px auto;
   padding: 0;
   width: 114px;
+}
+
+button:hover {
+  background-color: tomato;
+  color: black;
 }
 
 .checkout-container section {

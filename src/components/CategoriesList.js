@@ -7,7 +7,8 @@ export default class CategoriesList extends React.Component {
     return (
       <div className="categories-list">
         <h2>Categorias</h2>
-        <div>
+        <hr width="90%" />
+        <div className="categories-item">
           {categorias && categorias
             .map((categoria) => (
               <label key={ categoria.id } htmlFor={ categoria.id }>

@@ -1,6 +1,7 @@
 import React from 'react';
 import './styles/HomePage.css';
 import { Link } from 'react-router-dom';
+import { IoCartOutline } from 'react-icons/io5';
 import { getProductsFromCategoryAndQuery, getCategories } from '../services/api';
 import CategoriesList from './CategoriesList';
 
@@ -86,14 +87,13 @@ export default class HomePage extends React.Component {
               Pesquisar
             </button>
             <Link to="/shoppingcart" data-testid="shopping-cart-button">
-              Carrinho de Compras
+              <IoCartOutline size={ 32 } />
             </Link>
             <span>
-              Itens no carrinho:
               { qtdCart }
             </span>
           </div>
-          <p data-testid="home-initial-message">
+          <p className="pEachBar" data-testid="home-initial-message">
             Digite algum termo de pesquisa ou escolha uma categoria.
           </p>
           <div className="items-container">
