@@ -5,7 +5,10 @@
 }
 
 .categories-list {
-  border: 1px solid black;
+  background-color: white;
+  border: 5px double deeppink;
+  color: darkblue;
+  font-size: 14px;
   height: max-content;
   margin: 0 20px;
   padding: 12px;
@@ -14,8 +17,19 @@
 }
 
 .categories-list h2 {
+  background-color: white;
+  color: darkblue;
   margin-bottom: 10px;
-  text-align: center;
+  text-align: left;
+}
+
+.categories-item, label {
+  background-color: white;
+  margin: 10px 0;
+}
+
+.categories-item label:hover {
+  color: palevioletred;
 }
 
 .search-bar-and-items {
@@ -29,11 +43,13 @@
   align-items: center;
   display: flex;
   flex-flow: row;
+  font-size: 14px;
   justify-content: center;
-  width: 70%;
+  width: 100%;
 }
 
 .search-bar input {
+  background-color: lightgoldenrodyellow;
   border: 2px solid black;
   border-radius: 4px;
   height: 27px;
@@ -42,15 +58,17 @@
 }
 
 .search-bar button {
-  background-color: white;
+  background-color: yellow;
   border: 1px solid black;
+  color: darkblue;
   height: 27px;
   margin: auto 10px;
   padding: 3px;
 }
 
 .search-bar button:hover {
-  background-color: rgb(207, 207, 207);
+  background-color: darkblue;
+  color: white;
   cursor: pointer;
 }
 
@@ -67,11 +85,12 @@
 
 .each-item {
   align-items: center;
-  border: 1px solid black;
+  background-color: white;
+  border: 4px double darkblue;
   box-shadow: 2px 3px 4px hsl(228, 63%, 56%);
   display: flex;
   flex-flow: column;
-  justify-content: center;
+  justify-content: space-between;
   margin: 7px 0 7px 35px;
   min-width: min-content;
   padding: 10px;
@@ -79,15 +98,23 @@
 }
 
 h3 {
+  background-color: white;
   font-size: 14px;
   text-align: center;
 }
 
 img {
+  background-color: white;
   width: 90px;
 }
 
 p {
-  margin: 15px 0;
+  background-color: white;
 }
 
+.pEachBar {
+  background-color: gainsboro;
+  font-style: italic;
+  margin: 2px 15px 15px;
+  width: 100%;
+}
