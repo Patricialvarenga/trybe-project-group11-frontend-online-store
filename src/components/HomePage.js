@@ -114,6 +114,12 @@ export default class HomePage extends React.Component {
                   >
                     Comprar
                   </button>
+                  <Link
+                    to={ `/product/${categoriaEscolhida}/${id}` }
+                    data-testid="product-detail-link"
+                  >
+                    Detalhes
+                  </Link>
                 </div>
               ))
             }
