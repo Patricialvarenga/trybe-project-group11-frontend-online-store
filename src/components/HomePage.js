@@ -17,7 +17,7 @@ export default class HomePage extends React.Component {
       produto: '',
       itens: [],
       categorias: [],
-      categoriaEscolhida: 'MLB1055',
+      categoriaEscolhida: '',
       qtdCart: 0,
     };
   }

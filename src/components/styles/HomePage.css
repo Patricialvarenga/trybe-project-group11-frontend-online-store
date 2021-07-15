@@ -33,7 +33,7 @@
   width: 70%;
 }
 
-input {
+.search-bar input {
   border: 2px solid black;
   border-radius: 4px;
   height: 27px;
