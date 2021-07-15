@@ -9,9 +9,11 @@ export default class ShoppingCart extends React.Component {
     this.listCart = this.listCart.bind(this);
     this.emptyCart = this.emptyCart.bind(this);
     this.renderCart = this.renderCart.bind(this);
-
+    this.addProduct = this.addProduct.bind(this);
+    this.removeProduct = this.removeProduct.bind(this);
     this.state = {
       itensListCart: [],
+      itemsCounter: [],
     };
   }
 
@@ -36,6 +38,21 @@ export default class ShoppingCart extends React.Component {
     }
   }
 
+  addProduct(id) {
+    this.setState((prevState) => ({
+      itemsCounter: [...prevState.itemsCounter, id],
+    }));
+  }
+
+  removeProduct(id) {
+    const { itemsCounter } = this.state;
+    const idIndex = itemsCounter.indexOf(id);
+    itemsCounter.splice(idIndex, 1);
+    this.setState({
+      itemsCounter,
+    });
+  }
+
   emptyCart() {
     return (
       <div>
@@ -45,24 +62,39 @@ export default class ShoppingCart extends React.Component {
   }
 
   renderCart() {
-    const { itensListCart } = this.state;
+    const { itensListCart, itemsCounter } = this.state;
 
     return (
       <div>
         {
-          itensListCart.map(({ id, title, thumbnail, price }) => (
-            <div key={ id } className="checkout-item">
-              <h4 data-testid="shopping-cart-product-name">{title}</h4>
-              <img src={ thumbnail } alt="Foto do Produto" />
-              <p>{`R$${price}`}</p>
-              <p htmlFor="add"> Qtd.</p>
-              <p data-testid="shopping-cart-product-quantity">
-                {itensListCart.filter((item) => (
-                  item.id === id
-                )).length}
-              </p>
-            </div>
-          ))
+          itensListCart
+            .map(({ id, title, thumbnail, price }) => (
+              <div key={ id } className="checkout-item">
+                <h4 data-testid="shopping-cart-product-name">{title}</h4>
+                <img src={ thumbnail } alt="Foto do Produto" />
+                <p>{`R$${price}`}</p>
+                <p htmlFor="add"> Qtd.</p>
+                <p data-testid="shopping-cart-product-quantity">
+                  {itemsCounter.filter((item) => (
+                    item === id
+                  )).length + 1}
+                </p>
+                <button
+                  type="button"
+                  data-testid="product-increase-quantity"
+                  onClick={ () => this.addProduct(id) }
+                >
+                  +
+                </button>
+                <button
+                  type="button"
+                  data-testid="product-decrease-quantity"
+                  onClick={ () => this.removeProduct(id) }
+                >
+                  -
+                </button>
+              </div>
+            ))
         }
       </div>
     );
